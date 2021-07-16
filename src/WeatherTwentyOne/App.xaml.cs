@@ -1,29 +1,20 @@
 ﻿using Microsoft.Maui;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;
+using Microsoft.Maui.Controls.Xaml;
 using WeatherTwentyOne.Pages;
+
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
 namespace WeatherTwentyOne
 {
-	public partial class App : Microsoft.Maui.Controls.Application
+    public partial class App : Application
     {
-		public App()
-		{
-			InitializeComponent();
-		}
+        public App()
+        {
+            InitializeComponent();
+        }
 
-		protected override IWindow CreateWindow(IActivationState activationState)
-		{
-			Microsoft.Maui.Controls.Compatibility.Forms.Init(activationState);
-
-			this.On<Microsoft.Maui.Controls.PlatformConfiguration.Windows>()
-				.SetImageDirectory("Assets");
-
-			return new Microsoft.Maui.Controls.Window(
-				new NavigationPage(
-					new HomePage()
-				)
-			);
-		}
-	}
+        protected override Window CreateWindow(IActivationState activationState) =>
+            new Window(new NavigationPage(new HomePage())) { Title = "Weather TwentyOne" };
+    }
 }
